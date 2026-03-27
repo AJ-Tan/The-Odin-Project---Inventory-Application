@@ -19,5 +19,5 @@ app.use("/", indexRoute);
 const PORT = process.env.PORT || 4321;
 app.listen(PORT, (err) => {
   if (err) throw err;
-  console.log(`http://localhost${PORT}`);
+  console.log(`http://localhost:${PORT}`);
 });

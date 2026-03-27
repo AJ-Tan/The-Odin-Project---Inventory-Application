@@ -1,0 +1,42 @@
+<header class="page-header">
+  <div class="header-top">
+    <div class="menu-icon"><%- include("./menu-icon.ejs") %></div>
+    <div class="page-logo">Logo-here</div>
+  </div>
+  <nav class="page-nav">
+    <ul class="nav-list">
+      <li>
+        <div
+          class="nav-item-container <%= active === 'dashboard' ? 'selected' : '' %>"
+        >
+          <a href="/dashboard">Dashboard</a>
+        </div>
+        <div class="reverse-radius"></div>
+      </li>
+      <li>
+        <div
+          class="nav-item-container <%= active === 'product' ? 'selected' : '' %>"
+        >
+          <a href="/product">Product</a>
+        </div>
+        <div class="reverse-radius"></div>
+      </li>
+      <li>
+        <div
+          class="nav-item-container <%= active === 'inventory' ? 'selected' : '' %>"
+        >
+          <a href="/inventory">Inventory</a>
+        </div>
+        <div class="reverse-radius"></div>
+      </li>
+      <li>
+        <div
+          class="nav-item-container <%= active === 'settings' ? 'selected' : '' %>"
+        >
+          <a href="/settings">Settings</a>
+        </div>
+        <div class="reverse-radius"></div>
+      </li>
+    </ul>
+  </nav>
+</header>

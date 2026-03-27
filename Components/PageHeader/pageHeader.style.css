@@ -1,0 +1,82 @@
+.page-header {
+  background-color: var(--primary-color-1);
+  min-width: 15rem;
+  color: var(--text-menu-color);
+  padding-inline-start: 1rem;
+}
+
+.header-top {
+  display: flex;
+  padding-block: 2rem;
+}
+
+.nav-list {
+  list-style-type: none;
+
+  li {
+    position: relative;
+  }
+
+  .nav-item-container {
+    border-top-left-radius: 10rem;
+    border-bottom-left-radius: 10rem;
+    padding-block: 1rem;
+    padding-inline-start: 1.5rem;
+    position: relative;
+    z-index: 1;
+
+    &.selected {
+      border-radius: -2rem;
+      background-color: var(--bg-body);
+      color: var(--primary-color-1);
+
+      & ~ .reverse-radius {
+        display: block;
+      }
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .nav-item-container:not(.selected) a:hover {
+    color: var(--text-menu-color-hover);
+  }
+}
+
+.reverse-radius {
+  display: none;
+  height: 7rem;
+  aspect-ratio: 1/1;
+  background-color: var(--bg-body);
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -35%;
+    height: 70%;
+    width: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    background-color: var(--primary-color-1);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -35%;
+    height: 70%;
+    width: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    background-color: var(--primary-color-1);
+  }
+}
