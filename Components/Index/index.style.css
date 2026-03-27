@@ -13,6 +13,12 @@
   --bg-body: white;
 }
 
+:root {
+  --transition-speed-fast: 0.15s;
+  --transition-speed-avg: 0.3s;
+  --transition-speed-slow: 0.5s;
+}
+
 body {
   min-height: 100vh;
   font-family:
@@ -43,4 +49,8 @@ img {
 #app {
   display: flex;
   min-height: 100vh;
+
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 }

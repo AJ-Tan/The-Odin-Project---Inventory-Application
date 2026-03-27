@@ -1,42 +1,60 @@
 <header class="page-header">
   <div class="header-top">
-    <div class="menu-icon"><%- include("./menu-icon.ejs") %></div>
-    <div class="page-logo">Logo-here</div>
+    <button
+      class="menu-icon"
+      type="button"
+      aria-label="Open menu."
+      aria-controls="page-nav"
+      onclick="toggleExpand()"
+    >
+      <%- include("./menu-icon.ejs") %>
+    </button>
+    <div class="page-logo"><h1>Ventory</h1></div>
   </div>
-  <nav class="page-nav">
-    <ul class="nav-list">
-      <li>
-        <div
-          class="nav-item-container <%= active === 'dashboard' ? 'selected' : '' %>"
-        >
-          <a href="/dashboard">Dashboard</a>
-        </div>
-        <div class="reverse-radius"></div>
-      </li>
-      <li>
-        <div
-          class="nav-item-container <%= active === 'product' ? 'selected' : '' %>"
-        >
-          <a href="/product">Product</a>
-        </div>
-        <div class="reverse-radius"></div>
-      </li>
-      <li>
-        <div
-          class="nav-item-container <%= active === 'inventory' ? 'selected' : '' %>"
-        >
-          <a href="/inventory">Inventory</a>
-        </div>
-        <div class="reverse-radius"></div>
-      </li>
-      <li>
-        <div
-          class="nav-item-container <%= active === 'settings' ? 'selected' : '' %>"
-        >
-          <a href="/settings">Settings</a>
-        </div>
-        <div class="reverse-radius"></div>
-      </li>
-    </ul>
+  <nav id="page-nav" aria-expanded="false">
+    <div class="page-nav-wrapper">
+      <ul class="nav-list">
+        <li>
+          <div
+            class="nav-item-container <%= active === 'dashboard' ? 'selected' : '' %>"
+          >
+            <a href="/">Dashboard</a>
+          </div>
+          <div class="reverse-radius"></div>
+        </li>
+        <li>
+          <div
+            class="nav-item-container <%= active === 'product' ? 'selected' : '' %>"
+          >
+            <a href="/product">Product</a>
+          </div>
+          <div class="reverse-radius"></div>
+        </li>
+        <li>
+          <div
+            class="nav-item-container <%= active === 'inventory' ? 'selected' : '' %>"
+          >
+            <a href="/inventory">Inventory</a>
+          </div>
+          <div class="reverse-radius"></div>
+        </li>
+        <li>
+          <div
+            class="nav-item-container <%= active === 'settings' ? 'selected' : '' %>"
+          >
+            <a href="/settings">Settings</a>
+          </div>
+          <div class="reverse-radius"></div>
+        </li>
+      </ul>
+    </div>
   </nav>
+
+  <script>
+    const toggleExpand = () => {
+      const pageNav = document.querySelector("#page-nav");
+      const isExpanded = pageNav.ariaExpanded;
+      pageNav.ariaExpanded = isExpanded === "true" ? "false" : "true";
+    };
+  </script>
 </header>
