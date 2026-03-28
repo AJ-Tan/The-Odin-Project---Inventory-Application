@@ -1,7 +1,10 @@
 const express = require("express");
 const session = require("express-session");
 const path = require("path");
-const indexRoute = require("./Components/Index/indexRoute");
+const dashboardRoute = require("./Pages/Dashboard/dashboardRoute");
+const productsRoute = require("./Pages/Products/productsRoute");
+const inventoryRoute = require("./Pages/Inventory/inventoryRoute");
+const settingsRoute = require("./Pages/Settings/settingsRoute");
 
 const initializeSession = session({
   secret: process.env.SESSION_KEY,
@@ -10,11 +13,14 @@ const initializeSession = session({
 });
 
 const app = express();
-app.set("views", path.join(__dirname, "Components"));
+app.set("views", path.join(__dirname, "Pages"));
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "Components")));
+app.use(express.static(path.join(__dirname, "Pages")));
 app.use(initializeSession);
-app.use("/", indexRoute);
+app.use("/", dashboardRoute);
+app.use("/products", productsRoute);
+app.use("/inventory", inventoryRoute);
+app.use("/settings", settingsRoute);
 
 const PORT = process.env.PORT || 4321;
 app.listen(PORT, (err) => {
