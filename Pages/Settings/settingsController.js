@@ -1,5 +1,11 @@
 module.exports = {
   get: (req, res) => {
-    res.render("Settings/Settings.view.ejs", { active: "settings" });
+    const settingActive = req.params.settingActive
+      ? req.params.settingActive
+      : "category";
+    res.render("Settings/Settings.view.ejs", {
+      active: "settings",
+      settingActive,
+    });
   },
 };

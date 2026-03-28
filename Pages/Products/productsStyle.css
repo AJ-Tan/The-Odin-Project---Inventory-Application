@@ -7,12 +7,13 @@
 }
 
 :root {
-  --primary-color-1: rgb(61, 83, 159);
+  --primary-color-1: #265267;
   --text-menu-color: white;
   --text-menu-color-hover: rgb(221, 221, 221);
   --text-header-color-1: rgb(58, 59, 76);
   --text-content-color-1: rgb(94, 96, 104);
-  --bg-body: white;
+  --bg-body: #c8e1ed;
+  --bg-content: white;
 }
 
 :root {
@@ -23,6 +24,7 @@
 
 body {
   min-height: 100vh;
+  background-color: var(--bg-body);
   font-family:
     system-ui,
     -apple-system,
