@@ -18,7 +18,9 @@
         <td>
           <div class="tr-controls">
             <a class="tbl-btn tbl-btn-update" href="/settings/warehouse/update/<%= row.id %>">Update</a>
-            <button class="tbl-btn tbl-btn-delete" type="button">Delete</button>
+            <form action="/settings/warehouse/delete/<%= row.id %>" method="post">
+              <button type="submit" class="tbl-btn tbl-btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+            </form>
           </div>
         </td>
       </tr>

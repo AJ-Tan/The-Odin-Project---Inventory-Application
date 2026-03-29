@@ -1,1 +1,25 @@
-<div>WarehouseForm</div>
+<form
+  action="/settings/warehouse/<%= settingAction %>/<%= item.id %>"
+  method="post"
+  onsubmit="disableSubmit(this)"
+>
+  <h3><span class="capitalize"><%= settingAction %></span> Warehouse</h3>
+  <label
+    >*Name:
+    <input type="text" name="name" value="<%= item.name || '' %>" required
+  /></label>
+  <label>
+    Location:
+    <input type="text" name="location" value="<%= item.location || '' %>" />
+  </label>
+  <button type="submit">
+    <span class="capitalize"><%= settingAction %></span>
+  </button>
+</form>
+
+<script>
+  function disableSubmit(form) {
+    const submitButton = form.querySelector("button");
+    submitButton.disabled = true;
+  }
+</script>

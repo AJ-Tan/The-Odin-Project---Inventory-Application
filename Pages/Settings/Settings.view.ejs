@@ -46,7 +46,7 @@
                     <% if(!settingAction) { %>
                       <%- include("./SettingsPartials/Warehouse.view.ejs", { tblData }) %>
                     <% } else if(settingAction === 'add' || settingAction === 'update') { %>
-                      <%- include("./SettingsPartials/WarehouseForm.view.ejs", { tblData }) %>
+                      <%- include("./SettingsPartials/WarehouseForm.view.ejs", { tblData, settingAction, item }) %>
                     <% } %>
                 <% break;
                   case 'misc':
