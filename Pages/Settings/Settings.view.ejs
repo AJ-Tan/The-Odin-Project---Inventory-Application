@@ -13,27 +13,41 @@
         <div class="main-wrapper">
           <header class="main-header">
             <h2>Settings</h2>
-            <span>Manage your dropdowns items here.</span>
+            <span>Manage your dropdown items here.</span>
           </header>
 
           <div class="main-content">
             <nav class="settings-nav">
               <ul>
-                <li><a href="category">Category</a></li>
-                <li><a href="warehouse">Warehouse</a></li>
+                <li class="<%= settingActive === 'category' ? 'selected' : '' %>">
+                  <a href="/settings/category">Category</a>
+                </li>
+                <li class="<%= settingActive === 'warehouse' ? 'selected' : '' %>">
+                  <a href="/settings/warehouse">Warehouse</a>
+                </li>
+                <li class="<%= settingActive === 'misc' ? 'selected' : '' %>">
+                  <a href="/settings/misc">Misc</a>
+                </li>
               </ul>
             </nav>
-            <% switch(settingActive) {
-                case 'category': %>
-                <%- include("./SettingsPartials/Category.view.ejs") %>
-              <% break;
-                 case 'warehouse':
-              %>
-                <%- include("./SettingsPartials/Warehouse.view.ejs") %>
-              <% break;
-              %>
-            <% } %>
-            
+            <div class="settings-content">
+              <% switch(settingActive) {
+                  case 'category': %>
+                  <%- include("./SettingsPartials/Category.view.ejs", { tblData }) %>
+                <% break;
+                  case 'warehouse':
+                %>
+                  <%- include("./SettingsPartials/Warehouse.view.ejs", { tblData }) %>
+                <% break;
+                  case 'misc':
+                %>
+                  <%- include("./SettingsPartials/Misc.view.ejs", { tblData }) %>
+                <% break;
+                  default:
+                %>
+                  <span>Invalid parameter.</span>
+              <% } %>
+            </div>
           </div>
         </div>
       </main>

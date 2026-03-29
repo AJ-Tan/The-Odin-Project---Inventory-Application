@@ -1,1 +1,26 @@
-<div>Category</div>
+<div class="settings-table">
+  <div class="table-controls">
+    <a class="btn-link add" href="category/add">Add</a>
+  </div>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Main</th>
+      <th>Status</th>
+      <th>Controls</th>
+    </tr>
+    <% for(const row of tblData) { %>
+      <tr>
+        <td><%= row.name %></td>
+        <td><%= row.main %></td>
+        <td class="capitalize" ><%= row.status %></td>
+        <td>
+          <div class="tr-controls">
+            <a class="tbl-btn tbl-btn-update" href="category/update/<%= row.id %>">Update</a>
+            <button class="tbl-btn tbl-btn-delete" type="button">Delete</button>
+          </div>
+        </td>
+      </tr>
+    <% } %>
+  </table>
+</div>
