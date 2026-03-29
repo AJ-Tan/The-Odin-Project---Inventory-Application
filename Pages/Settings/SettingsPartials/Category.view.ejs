@@ -1,6 +1,6 @@
 <div class="settings-table">
   <div class="table-controls">
-    <a class="btn-link add" href="category/add">Add</a>
+    <a class="btn-link add" href="/settings/category/add">Add</a>
   </div>
   <table>
     <tr>
@@ -16,8 +16,10 @@
         <td class="capitalize" ><%= row.status %></td>
         <td>
           <div class="tr-controls">
-            <a class="tbl-btn tbl-btn-update" href="category/update/<%= row.id %>">Update</a>
-            <button class="tbl-btn tbl-btn-delete" type="button">Delete</button>
+            <a class="tbl-btn tbl-btn-update" href="/settings/category/update/<%= row.id %>">Update</a>
+            <form action="/settings/category/delete/<%= row.id %>" method="post">
+              <button type="submit" class="tbl-btn tbl-btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+            </form>
           </div>
         </td>
       </tr>

@@ -33,11 +33,21 @@
             <div class="settings-content">
               <% switch(settingActive) {
                   case 'category': %>
-                  <%- include("./SettingsPartials/Category.view.ejs", { tblData }) %>
+                    <% if(!settingAction) { %>
+                      <%- include("./SettingsPartials/Category.view.ejs", { tblData }) %>
+                    <% } else if(settingAction === 'add' || settingAction === 'update') { %>
+                      <%- include("./SettingsPartials/CategoryForm.view.ejs", { tblData, settingAction, item }) %>
+                    <% } else { %>
+                        <span>Invalid parameter.</span>
+                    <% } %>
                 <% break;
                   case 'warehouse':
                 %>
-                  <%- include("./SettingsPartials/Warehouse.view.ejs", { tblData }) %>
+                    <% if(!settingAction) { %>
+                      <%- include("./SettingsPartials/Warehouse.view.ejs", { tblData }) %>
+                    <% } else if(settingAction === 'add' || settingAction === 'update') { %>
+                      <%- include("./SettingsPartials/WarehouseForm.view.ejs", { tblData }) %>
+                    <% } %>
                 <% break;
                   case 'misc':
                 %>
