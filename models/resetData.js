@@ -53,7 +53,7 @@ VALUES
 
 INSERT INTO inventory_application.warehouse (name, location, status)
 VALUES
-('Main Warehouse', 'Zamboanga City', 'active'),
+('Main Warehouse', 'Manila City', 'active'),
 ('Secondary Warehouse', 'Pagadian City', 'active');
 
 INSERT INTO inventory_application.inventory (product_id, warehouse_id, quantity)

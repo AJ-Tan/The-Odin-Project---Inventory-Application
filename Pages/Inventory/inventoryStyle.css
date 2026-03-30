@@ -1,4 +1,4 @@
-@import "../Partials/PageHeader/pageHeader.style.css";
+@import "../Common/Components/PageHeader/pageHeader.style.css";
 
 * {
   margin: 0;
