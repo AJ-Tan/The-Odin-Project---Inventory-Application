@@ -4,11 +4,11 @@ const router = express.Router();
 
 router.use(express.urlencoded({ extended: true }));
 router.get("/", controller.get);
-router.get("/:settingActive", controller.get);
-router.get("/:settingActive/:settingAction", controller.get);
-router.post("/:settingActive/:settingAction", controller.postAdd);
-router.get("/:settingActive/:settingAction/:id", controller.get);
-router.post("/:settingActive/delete/:id", controller.postDelete);
-router.post("/:settingActive/:settingAction/:id", controller.postUpdate);
+router.post("/misc/", controller.postReset);
+router.get("/:content/", controller.get);
+router.get("/:content/:id", controller.get);
+router.post("/:content", controller.postAdd);
+router.post("/:content/:id", controller.postUpdate);
+router.post("/:content/delete/:id", controller.postDelete);
 
 module.exports = router;

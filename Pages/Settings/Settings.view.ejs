@@ -19,39 +19,37 @@
           <div class="main-content">
             <nav class="settings-nav">
               <ul>
-                <li class="<%= settingActive === 'category' ? 'selected' : '' %>">
-                  <a href="/settings/category">Category</a>
+                <li class="<%= settingsContent === 'category' ? 'selected' : '' %>">
+                  <a href="/settings?content=category">Category</a>
                 </li>
-                <li class="<%= settingActive === 'warehouse' ? 'selected' : '' %>">
-                  <a href="/settings/warehouse">Warehouse</a>
+                <li class="<%= settingsContent === 'warehouse' ? 'selected' : '' %>">
+                  <a href="/settings?content=warehouse">Warehouse</a>
                 </li>
-                <li class="<%= settingActive === 'misc' ? 'selected' : '' %>">
-                  <a href="/settings/misc">Misc</a>
+                <li class="<%= settingsContent === 'misc' ? 'selected' : '' %>">
+                  <a href="/settings?content=misc">Misc</a>
                 </li>
               </ul>
             </nav>
             <div class="settings-content">
-              <% switch(settingActive) {
+              <% switch(settingsContent) {
                   case 'category': %>
-                    <% if(!settingAction) { %>
-                      <%- include("./SettingsPartials/Category.view.ejs", { tblData }) %>
-                    <% } else if(settingAction === 'add' || settingAction === 'update') { %>
-                      <%- include("./SettingsPartials/CategoryForm.view.ejs", { tblData, settingAction, item }) %>
+                    <% if(params?.content) { %>
+                      <%- include("./SettingsPartials/CategoryForm.view.ejs") %>
                     <% } else { %>
-                        <span>Invalid parameter.</span>
+                      <%- include("./SettingsPartials/Category.view.ejs") %>
                     <% } %>
                 <% break;
                   case 'warehouse':
                 %>
-                    <% if(!settingAction) { %>
-                      <%- include("./SettingsPartials/Warehouse.view.ejs", { tblData }) %>
-                    <% } else if(settingAction === 'add' || settingAction === 'update') { %>
-                      <%- include("./SettingsPartials/WarehouseForm.view.ejs", { tblData, settingAction, item }) %>
-                    <% } %>
+                  <% if(params?.content) { %>
+                    <%- include("./SettingsPartials/WarehouseForm.view.ejs") %>
+                  <% } else { %>
+                    <%- include("./SettingsPartials/Warehouse.view.ejs") %>
+                  <% } %>
                 <% break;
                   case 'misc':
                 %>
-                  <%- include("./SettingsPartials/Misc.view.ejs", { tblData }) %>
+                  <%- include("./SettingsPartials/Misc.view.ejs") %>
                 <% break;
                   default:
                 %>

@@ -1,9 +1,14 @@
 <form
-  action="/settings/warehouse/<%= settingAction %>/<%= item.id %>"
+  action="/settings/warehouse/<%= item.id %>"
   method="post"
   onsubmit="disableSubmit(this)"
 >
-  <h3><span class="capitalize"><%= settingAction %></span> Warehouse</h3>
+  <div class="form-header">
+    <h3>
+      <span class="capitalize"><%= params.id ? 'Update' : 'Add' %></span>
+      Warehouse
+    </h3>
+  </div>
   <label
     >*Name:
     <input type="text" name="name" value="<%= item.name || '' %>" required
@@ -13,7 +18,7 @@
     <input type="text" name="location" value="<%= item.location || '' %>" />
   </label>
   <button type="submit">
-    <span class="capitalize"><%= settingAction %></span>
+    <span class="capitalize"><%= params.id ? 'Update' : 'Add' %></span>
   </button>
 </form>
 

@@ -1,4 +1,5 @@
 const pool = require("./pool");
+const resetData = require("./resetData");
 
 const getAllCategory = async () => {
   const { rows } = await pool.query(
@@ -90,4 +91,5 @@ module.exports = {
   insertWarehouse,
   updateWarehouse,
   deleteWarehouse,
+  resetData,
 };

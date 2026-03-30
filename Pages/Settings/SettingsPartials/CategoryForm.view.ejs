@@ -1,5 +1,9 @@
-<form action="/settings/category/<%= settingAction %>/<%= item.id %>" method="post" onsubmit="disableSubmit(this)">
-  <h3><span class="capitalize"><%= settingAction %></span> Category</h3>
+<form action="/settings/category/<%= item.id %>" method="post" onsubmit="disableSubmit(this)">
+  <header class="form-header">
+    <h3>
+      <span class="capitalize"><%= params.id ? 'Update' : 'Add' %></span> Category
+    </h3>
+  </header>
   <label>*Name: <input type="text" name="name" value="<%= item.name || '' %>" required /></label>
   <label>
     Parent:
@@ -12,7 +16,7 @@
         <% } %>
     </select>
   </label>
-  <button type="submit"><span class="capitalize"><%= settingAction %></span></button>
+  <button type="submit"><span class="capitalize"><%= params.id ? 'Update' : 'Add' %></span></button>
 </form>
 
 <script>
