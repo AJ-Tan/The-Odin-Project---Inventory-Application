@@ -7,14 +7,12 @@
     <tr>
       <th>Name</th>
       <th>Location</th>
-      <th>Status</th>
       <th>Controls</th>
     </tr>
     <% for(const row of tblData) { %>
       <tr>
         <td><%= row.name %></td>
         <td><%= row.location %></td>
-        <td class="capitalize" ><%= row.status %></td>
         <td>
           <div class="tr-controls">
             <a class="tbl-btn tbl-btn-update" href="/settings/warehouse/<%= row.id %>">Update</a>

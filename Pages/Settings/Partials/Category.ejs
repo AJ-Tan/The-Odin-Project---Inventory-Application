@@ -6,14 +6,12 @@
     <tr>
       <th>Name</th>
       <th>Parent</th>
-      <th>Status</th>
       <th>Controls</th>
     </tr>
     <% for(const row of tblData) { %>
       <tr>
         <td><%= row.name %></td>
         <td><%= row.main %></td>
-        <td class="capitalize" ><%= row.status %></td>
         <td>
           <div class="tr-controls">
             <a class="tbl-btn tbl-btn-update" href="/settings/category/<%= row.id %>">Update</a>
