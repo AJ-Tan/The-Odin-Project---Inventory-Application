@@ -1,5 +1,11 @@
+const dbQueries = require("./DB Queries/inventoryQueries");
+
 module.exports = {
-  get: (req, res) => {
-    res.render("Inventory/Inventory.view.ejs", { active: "inventory" });
+  get: async (req, res) => {
+    const inventoryData = await dbQueries.getAllInventory();
+    res.render("Inventory/Inventory.view.ejs", {
+      active: "inventory",
+      inventoryData,
+    });
   },
 };

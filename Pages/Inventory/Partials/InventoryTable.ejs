@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Warehouse</th>
+    <th>Quantity</th>
+    <th>Controls</th>
+  </tr>
+  <% for(const row of inventoryData) { %>
+      <tr>
+        <td><%= row.product %></td>
+        <td><%= row.warehouse %></td>
+        <td class="capitalize center" ><%= Number(row.quantity).toLocaleString() %></td>
+        <td>
+          <div class="tr-controls">
+            <a class="tbl-btn tbl-btn-update" href="/settings/category/">Update</a>
+            <form action="/settings/category/delete/" method="post">
+              <button type="submit" class="tbl-btn tbl-btn-delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+  <% } %>
+</table>

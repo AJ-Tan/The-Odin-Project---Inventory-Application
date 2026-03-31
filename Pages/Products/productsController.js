@@ -1,5 +1,11 @@
+const dbQueries = require("./DB Queries/productsQueries");
+
 module.exports = {
-  get: (req, res) => {
-    res.render("Products/Products.view.ejs", { active: "product" });
+  get: async (req, res) => {
+    const productsData = await dbQueries.getAllProducts();
+    res.render("Products/Products.view.ejs", {
+      active: "product",
+      productsData,
+    });
   },
 };
