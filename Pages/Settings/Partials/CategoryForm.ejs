@@ -17,17 +17,24 @@
     </div>
   </div>
 
-  <label>
-    Parent:
-    <select name="parent_id">
-      <option value="">Select (Optional)</option>
-      <% for(const row of tblData.sort((a,b) => a.name.localeCompare(b.name))) { %>
-          <% if(row.id !== item.id) { %>
-            <option value="<%= row.id %>" <%= oldInputs.parent_id == row.id ? 'selected' : row.id === item.parent_id ? 'selected' : '' %>><%= row.name %></option>
+  <div class="input-group">
+    <label>
+      Parent:
+      <select name="parent_id">
+        <option value="">Select (Optional)</option>
+        <% for(const row of tblData.sort((a,b) => a.name.localeCompare(b.name))) { %>
+            <% if(row.id !== item.id) { %>
+              <option value="<%= row.id %>" <%= oldInputs.parent_id == row.id ? 'selected' : row.id === item.parent_id ? 'selected' : '' %>><%= row.name %></option>
+            <% } %>
           <% } %>
-        <% } %>
-    </select>
-  </label>
+      </select>
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='parent_id')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
   <button type="submit"><span class="capitalize"><%= params.id ? 'Update' : 'Add' %></span></button>
 </form>
 

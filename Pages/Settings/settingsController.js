@@ -26,6 +26,20 @@ const validateInput = [
     .optional({ checkFalsy: true })
     .isLength({ min: 2 })
     .withMessage("Location length is too short."),
+  body("parent_id")
+    .optional({ checkFalsy: true })
+    .custom((value, { req }) => {
+      const parent_list = req.flash("parent_list");
+      const exists = parent_list.some((item) => item.id === Number(value));
+
+      if (!exists) {
+        throw new Error(
+          "Parent category might cause circular reference, please select another.",
+        );
+      }
+
+      return true;
+    }),
 ];
 
 module.exports = {
@@ -43,6 +57,7 @@ module.exports = {
 
     if (settingsContent === "category") {
       tblData = await settingsQueries.getAllCategory(req.params.id);
+      req.flash("parent_list", tblData);
       if (itemId) {
         item = await settingsQueries.getSelectedCategory(itemId);
       }
