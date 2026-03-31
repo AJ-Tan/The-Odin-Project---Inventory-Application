@@ -42,7 +42,7 @@ module.exports = {
     const itemId = req.params.id;
 
     if (settingsContent === "category") {
-      tblData = await settingsQueries.getAllCategory();
+      tblData = await settingsQueries.getAllCategory(req.params.id);
       if (itemId) {
         item = await settingsQueries.getSelectedCategory(itemId);
       }

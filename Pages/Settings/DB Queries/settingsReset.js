@@ -22,13 +22,14 @@ VALUES
 -- Level 2 (child of Mobile Phones)
 (4, 'Smartphones', 2, 'active');
 
-INSERT INTO inventory_application.products (name, price, status)
+INSERT INTO inventory_application.products (name, price, status, category_id)
 VALUES
-('iPhone 13', 45000, 'active'),
-('Samsung Galaxy S22', 42000, 'active'),
-('Wooden Table', 3500, 'active'),
-('T-Shirt Basic', 300, 'active'),
-('Office Chair', 2500, 'active');
+('iPhone 13', 45000, 'active',5),
+('Samsung Galaxy S22', 42000, 'active',5),
+('Wooden Table', 3500, 'active',3),
+('T-Shirt Basic', 300, 'active',2),
+('Office Chair', 2500, 'active',3),
+('Sample', 123, 'active',NULL);
 
 INSERT INTO inventory_application.product_categories (product_id, category_id)
 VALUES
