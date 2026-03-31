@@ -16,7 +16,7 @@
   /></label>
   <label>
     Location:
-    <input type="text" name="location" value="<%= item.location || '' %>" />
+    <textarea name="location" value="<%= item.location || '' %>"></textarea>
   </label>
   <button type="submit">
     <span class="capitalize"><%= params.id ? 'Update' : 'Add' %></span>

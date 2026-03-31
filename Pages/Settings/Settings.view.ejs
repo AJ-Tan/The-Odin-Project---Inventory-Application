@@ -34,22 +34,22 @@
               <% switch(settingsContent) {
                   case 'category': %>
                     <% if(params?.content) { %>
-                      <%- include("./SettingsPartials/CategoryForm.view.ejs") %>
+                      <%- include("./Partials/CategoryForm.ejs") %>
                     <% } else { %>
-                      <%- include("./SettingsPartials/Category.view.ejs") %>
+                      <%- include("./Partials/Category.ejs") %>
                     <% } %>
                 <% break;
                   case 'warehouse':
                 %>
                   <% if(params?.content) { %>
-                    <%- include("./SettingsPartials/WarehouseForm.view.ejs") %>
+                    <%- include("./Partials/WarehouseForm.ejs") %>
                   <% } else { %>
-                    <%- include("./SettingsPartials/Warehouse.view.ejs") %>
+                    <%- include("./Partials/Warehouse.ejs") %>
                   <% } %>
                 <% break;
                   case 'misc':
                 %>
-                  <%- include("./SettingsPartials/Misc.view.ejs") %>
+                  <%- include("./Partials/Misc.ejs") %>
                 <% break;
                   default:
                 %>
