@@ -8,7 +8,7 @@
   }
 
   input {
-    max-width: 15rem;
+    max-width: 17rem;
   }
 
   select {
@@ -103,4 +103,21 @@
     color: var(--color-ok);
     margin-block-start: 0.5rem;
   }
+}
+
+label:has(+ .input-error p) input,
+label:has(+ .input-error p) textarea {
+  border-color: var(--color-warning);
+}
+
+.input-error {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-block-start: 0.5rem;
+}
+
+.input-error p {
+  color: var(--color-warning);
+  font-size: 0.9rem;
 }

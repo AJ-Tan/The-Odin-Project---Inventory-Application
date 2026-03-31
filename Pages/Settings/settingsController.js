@@ -1,4 +1,32 @@
 const settingsQueries = require("./DB Queries/settingsQueries");
+const { body, validationResult } = require("express-validator");
+
+const validateInput = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("This field is required.")
+    .isLength({ min: 2 })
+    .withMessage("Name length is too short."),
+  body("email")
+    .trim()
+    .optional({ checkFalsy: true })
+    .isEmail()
+    .withMessage("Invalid email format.")
+    .normalizeEmail(),
+  body("phone")
+    .trim()
+    .optional({ checkFalsy: true })
+    .matches(/^\+?[0-9\s\-]+$/)
+    .withMessage("Phone must contain only numbers, spaces, +, and -")
+    .isLength({ min: 7, max: 20 })
+    .withMessage("Phone length must be between 7 and 20."),
+  body("location")
+    .trim()
+    .optional({ checkFalsy: true })
+    .isLength({ min: 2 })
+    .withMessage("Location length is too short."),
+];
 
 module.exports = {
   get: async (req, res) => {
@@ -32,50 +60,86 @@ module.exports = {
       item,
       params,
       queries: req.query,
+      inputError: req.flash("inputError"),
+      oldInputs: req.flash("oldInputs")[0] || {},
     });
   },
 
-  postAdd: (req, res) => {
-    const content = req.params.content;
+  postAdd: [
+    validateInput,
+    async (req, res) => {
+      const content = req.params.content;
+      const inputError = validationResult(req);
 
-    switch (content) {
-      case "category":
-        settingsQueries.insertCategory(req.body.name, req.body.parent_id);
-        res.status(204).redirect("/settings?content=category");
-        break;
-      case "warehouse":
-        settingsQueries.insertWarehouse(req.body.name, req.body.location);
-        res.status(204).redirect("/settings?content=warehouse");
-        break;
-      default:
-        res.status(404).send("Invalid url.");
-    }
-  },
+      if (!inputError.isEmpty()) {
+        req.flash("inputError", inputError.array());
+        req.flash("oldInputs", req.body);
 
-  postUpdate: (req, res) => {
-    const content = req.params.content;
+        return res.status(422).redirect(`/settings/${content}/`);
+      }
 
-    switch (content) {
-      case "category":
-        settingsQueries.updateCategory(
-          req.params.id,
-          req.body.name,
-          req.body.parent_id,
-        );
-        res.status(204).redirect("/settings?content=category");
-        break;
-      case "warehouse":
-        settingsQueries.updateWarehouse(
-          req.params.id,
-          req.body.name,
-          req.body.location,
-        );
-        res.status(204).redirect("/settings?content=warehouse");
-        break;
-      default:
-        res.status(404).send("Invalid url.");
-    }
-  },
+      switch (content) {
+        case "category":
+          await settingsQueries.insertCategory(
+            req.body.name,
+            req.body.parent_id,
+          );
+          res.status(204).redirect("/settings?content=category");
+          break;
+        case "warehouse":
+          await settingsQueries.insertWarehouse(
+            req.body.name,
+            req.body.email,
+            req.body.phone,
+            req.body.location,
+          );
+          res.status(204).redirect("/settings?content=warehouse");
+          break;
+        default:
+          res.status(404).send("Invalid url.");
+      }
+    },
+  ],
+
+  postUpdate: [
+    validateInput,
+    (req, res) => {
+      const content = req.params.content;
+      const inputError = validationResult(req);
+
+      if (!inputError.isEmpty()) {
+        req.flash("inputError", inputError.array());
+        req.flash("oldInputs", req.body);
+
+        return res
+          .status(422)
+          .redirect(`/settings/${content}/${req.params.id}`);
+      }
+
+      switch (content) {
+        case "category":
+          settingsQueries.updateCategory(
+            req.params.id,
+            req.body.name,
+            req.body.parent_id,
+          );
+          res.status(204).redirect("/settings?content=category");
+          break;
+        case "warehouse":
+          settingsQueries.updateWarehouse(
+            req.params.id,
+            req.body.name,
+            req.body.email,
+            req.body.phone,
+            req.body.location,
+          );
+          res.status(204).redirect("/settings?content=warehouse");
+          break;
+        default:
+          res.status(404).send("Invalid url.");
+      }
+    },
+  ],
 
   postDelete: (req, res) => {
     const content = req.params.content;

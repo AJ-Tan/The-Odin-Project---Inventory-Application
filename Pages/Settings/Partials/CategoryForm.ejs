@@ -4,14 +4,26 @@
       <span class="capitalize"><%= params.id ? 'Update' : 'Add' %></span> Category
     </h3>
   </header>
-  <label>*Name: <input type="text" name="name" value="<%= item.name || '' %>" required /></label>
+
+  <div class="input-group">
+    <label>*Name: 
+      <input type="text" name="name" value="<%= oldInputs.name || item.name || '' %>" 
+      required onkeydown="clearErr(this)" />
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='name')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+
   <label>
     Parent:
     <select name="parent_id">
       <option value="">Select (Optional)</option>
       <% for(const row of tblData) { %>
           <% if(row.id !== item.id) { %>
-            <option value="<%= row.id %>" <%= row.id === item.parent_id ? 'selected' : '' %>><%= row.name %></option>
+            <option value="<%= row.id %>" <%= oldInputs.parent_id == row.id ? 'selected' : row.id === item.parent_id ? 'selected' : '' %>><%= row.name %></option>
           <% } %>
         <% } %>
     </select>
@@ -20,9 +32,14 @@
 </form>
 
 <script>
-function disableSubmit(form) {
-  const submitButton = form.querySelector('button');
-  submitButton.disabled = true;
-}
+  function disableSubmit(form) {
+    const submitButton = form.querySelector('button');
+    submitButton.disabled = true;
+  }
+
+  function clearErr(inputItem) {
+    const inputParent = inputItem.parentNode.parentNode.querySelector('.input-error');
+    inputParent.replaceChildren();
+  }
 </script>
 

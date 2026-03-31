@@ -10,14 +10,51 @@
       Warehouse
     </h3>
   </div>
-  <label
-    >*Name:
-    <input type="text" name="name" value="<%= item.name || '' %>" required
-  /></label>
-  <label>
-    Location:
-    <textarea name="location"><%= item.location || '' %></textarea>
-  </label>
+  <div class="input-group">
+    <label>*Name:
+      <input type="text" name="name" value="<%= oldInputs.name || item.name || '' %>" 
+      required onkeydown="clearErr(this)"
+      />
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='name')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label
+      >Email: <input type="email" name="email" value="<%= oldInputs.email || item.email || '' %>"
+     onkeydown="clearErr(this)" /></label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='email')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+    
+  <div class="input-group">
+    <label
+      >Phone: <input type="text" name="phone" value="<%= oldInputs.phone || item.phone || '' %>"
+    onkeydown="clearErr(this)" /></label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='phone')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+  <div class="input-group">
+    <label>
+      Location:
+      <textarea name="location" onkeydown="clearErr(this)"><%= oldInputs.location || item.location || '' %></textarea>
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='location')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
   <button type="submit">
     <span class="capitalize"><%= params.id ? 'Update' : 'Add' %></span>
   </button>
@@ -27,5 +64,10 @@
   function disableSubmit(form) {
     const submitButton = form.querySelector("button");
     submitButton.disabled = true;
+  }
+
+  function clearErr(inputItem) {
+    const inputParent = inputItem.parentNode.parentNode.querySelector('.input-error');
+    inputParent.replaceChildren();
   }
 </script>

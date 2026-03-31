@@ -51,10 +51,10 @@ VALUES
 -- Office Chair (Furniture only)
 (5, 3, 1);
 
-INSERT INTO inventory_application.warehouse (name, location, status)
+INSERT INTO inventory_application.warehouse (name, location, phone, email, status)
 VALUES
-('Main Warehouse', 'Manila City', 'active'),
-('Secondary Warehouse', 'Pagadian City', 'active');
+('Main Warehouse', 'Manila City', '09171234567', 'mainwarehouse@email.com', 'active'),
+('Secondary Warehouse', 'Pagadian City', '09987654321', 'secondarywarehouse@email.com', 'active');
 
 INSERT INTO inventory_application.inventory (product_id, warehouse_id, quantity)
 VALUES

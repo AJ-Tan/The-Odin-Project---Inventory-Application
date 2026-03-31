@@ -45,7 +45,7 @@ const deleteCategory = async (id) => {
 
 const getAllWarehouse = async () => {
   const { rows } = await pool.query(
-    `SELECT * FROM inventory_application.warehouse WHERE status='active'`,
+    `SELECT * FROM inventory_application.warehouse WHERE status='active' ORDER BY id ASC`,
   );
 
   return rows;
@@ -60,17 +60,17 @@ const getSelectedWarehouse = async (id) => {
   return rows[0];
 };
 
-const insertWarehouse = async (name, location) => {
+const insertWarehouse = async (name, email, phone, location) => {
   await pool.query(
-    `INSERT INTO inventory_application.warehouse (name, location) VALUES ($1, $2)`,
-    [name, location],
+    `INSERT INTO inventory_application.warehouse (name, email, phone, location) VALUES ($1, $2, $3, $4)`,
+    [name, email, phone, location],
   );
 };
 
-const updateWarehouse = async (id, name, location) => {
+const updateWarehouse = async (id, name, email, phone, location) => {
   await pool.query(
-    `UPDATE inventory_application.warehouse SET name=$2, location=$3 WHERE id=$1`,
-    [id, name, location],
+    `UPDATE inventory_application.warehouse SET name=$2, email=$3, phone=$4, location=$5 WHERE id=$1`,
+    [id, name, email, phone, location],
   );
 };
 

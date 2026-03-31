@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const flash = require("connect-flash");
 const path = require("path");
 const dashboardRoute = require("./Pages/Dashboard/dashboardRoute");
 const productsRoute = require("./Pages/Products/productsRoute");
@@ -17,6 +18,7 @@ app.set("views", path.join(__dirname, "Pages"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "Pages")));
 app.use(initializeSession);
+app.use(flash());
 app.use("/", dashboardRoute);
 app.use("/products", productsRoute);
 app.use("/inventory", inventoryRoute);
