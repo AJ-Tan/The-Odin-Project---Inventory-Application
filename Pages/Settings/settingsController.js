@@ -103,7 +103,7 @@ module.exports = {
 
   postUpdate: [
     validateInput,
-    (req, res) => {
+    async (req, res) => {
       const content = req.params.content;
       const inputError = validationResult(req);
 
@@ -118,7 +118,7 @@ module.exports = {
 
       switch (content) {
         case "category":
-          settingsQueries.updateCategory(
+          await settingsQueries.updateCategory(
             req.params.id,
             req.body.name,
             req.body.parent_id,
@@ -126,7 +126,7 @@ module.exports = {
           res.status(204).redirect("/settings?content=category");
           break;
         case "warehouse":
-          settingsQueries.updateWarehouse(
+          await settingsQueries.updateWarehouse(
             req.params.id,
             req.body.name,
             req.body.email,
@@ -141,16 +141,16 @@ module.exports = {
     },
   ],
 
-  postDelete: (req, res) => {
+  postDelete: async (req, res) => {
     const content = req.params.content;
 
     switch (content) {
       case "category":
-        settingsQueries.deleteCategory(req.params.id);
+        await settingsQueries.deleteCategory(req.params.id);
         res.status(204).redirect("/settings?content=category");
         break;
       case "warehouse":
-        settingsQueries.deleteWarehouse(req.params.id);
+        await settingsQueries.deleteWarehouse(req.params.id);
         res.status(204).redirect("/settings?content=warehouse");
         break;
       default:
@@ -158,8 +158,8 @@ module.exports = {
     }
   },
 
-  postReset: (req, res) => {
-    settingsQueries.resetData();
+  postReset: async (req, res) => {
+    await settingsQueries.resetData();
     res.status(204).redirect("/settings?content=misc&success=t");
   },
 };

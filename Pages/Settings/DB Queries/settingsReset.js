@@ -30,26 +30,26 @@ VALUES
 ('T-Shirt Basic', 300, 'active'),
 ('Office Chair', 2500, 'active');
 
-INSERT INTO inventory_application.product_categories (product_id, category_id, seq)
+INSERT INTO inventory_application.product_categories (product_id, category_id)
 VALUES
 -- iPhone (Electronics → Mobile Phones → Smartphones)
-(1, 1, 1),
-(1, 4, 2),
-(1, 5, 3),
+(1, 1),
+(1, 4),
+(1, 5),
 
 -- Samsung (Electronics → Mobile Phones → Smartphones)
-(2, 1, 1),
-(2, 4, 2),
-(2, 5, 3),
+(2, 1),
+(2, 4),
+(2, 5),
 
 -- Wooden Table (Furniture only)
-(3, 3, 1),
+(3, 3),
 
 -- T-Shirt (Clothing only)
-(4, 2, 1),
+(4, 2),
 
 -- Office Chair (Furniture only)
-(5, 3, 1);
+(5, 3);
 
 INSERT INTO inventory_application.warehouse (name, location, phone, email, status)
 VALUES
