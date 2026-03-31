@@ -38,7 +38,7 @@ module.exports = {
     const params = req.params;
 
     let tblData = null;
-    let item = { name: "", parent_id: null, location: "" };
+    let item = {};
     const itemId = req.params.id;
 
     if (settingsContent === "category") {
