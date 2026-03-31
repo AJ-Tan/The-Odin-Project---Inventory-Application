@@ -108,12 +108,12 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 850px) {
   #app {
     padding-inline-start: 15.5rem;
   }
 }
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 850px) {
   .reverse-radius {
     display: none !important;
   }

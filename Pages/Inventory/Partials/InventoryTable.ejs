@@ -2,6 +2,7 @@
   <tr>
     <th>Product</th>
     <th>Warehouse</th>
+    <th>Location</th>
     <th>Quantity</th>
     <th>Controls</th>
   </tr>
@@ -9,6 +10,7 @@
       <tr>
         <td><%= row.product %></td>
         <td><%= row.warehouse %></td>
+        <td><%= row.location %></td>
         <td class="capitalize center" ><%= Number(row.quantity).toLocaleString() %></td>
         <td>
           <div class="tr-controls">

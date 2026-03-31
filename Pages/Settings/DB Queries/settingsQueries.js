@@ -1,12 +1,37 @@
 const pool = require("../../../models/pool");
 const resetData = require("./settingsReset");
 
-const getAllCategory = async () => {
-  const { rows } = await pool.query(
-    `SELECT c1.id id, c1.name name, c2.name main, c1.status FROM inventory_application.categories c1 LEFT JOIN inventory_application.categories c2 ON c1.parent_id = c2.id
+const getAllCategory = async (category_id = undefined) => {
+  let result = null;
+
+  if (category_id) {
+    console.log("asd");
+    result = await pool.query(
+      `WITH RECURSIVE descendants AS (
+        SELECT id, name FROM inventory_application.categories
+        WHERE parent_id=$1
+
+        UNION ALL
+
+        SELECT c.id, c.name
+        FROM inventory_application.categories c
+        JOIN descendants d ON d.id=c.parent_id
+      )
+
+      SELECT * FROM inventory_application.categories c
+      WHERE c.id NOT IN (SELECT id FROM descendants) 
+      AND id <> $1 
+      AND status = 'active'`,
+      [category_id],
+    );
+  } else {
+    result = await pool.query(
+      `SELECT c1.id id, c1.name name, c2.name main, c1.status FROM inventory_application.categories c1 LEFT JOIN inventory_application.categories c2 ON c1.parent_id = c2.id
     WHERE c1.status = 'active' ORDER BY c1.id ASC`,
-  );
-  return rows;
+    );
+  }
+
+  return result.rows;
 };
 
 const getSelectedCategory = async (id) => {
@@ -37,9 +62,14 @@ const updateCategory = async (id, name, parent_id) => {
 };
 
 const deleteCategory = async (id) => {
-  await pool.query(
-    `UPDATE inventory_application.categories SET status='archived' WHERE id=$1`,
+  const { rows } = await pool.query(
+    `UPDATE inventory_application.categories SET status='archived' WHERE id=$1 RETURNING parent_id`,
     [id],
+  );
+
+  await pool.query(
+    `UPDATE inventory_application.categories SET parent_id=$2 WHERE parent_id=$1`,
+    [id, rows[0]?.parent_id],
   );
 };
 

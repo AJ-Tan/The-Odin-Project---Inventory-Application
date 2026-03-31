@@ -16,7 +16,12 @@
             <span>Manage your product items here.</span>
           </header>
           <div class="main-content">
-            <%- include("./Partials/ProductsTable.ejs") %>
+            
+            <% if(content === 'form') { %>
+              <%- include("./Partials/ProductsForm.ejs") %>
+            <% } else { %>
+              <%- include("./Partials/ProductsTable.ejs") %>
+            <% } %>
           </div>
         </div>
       </main>

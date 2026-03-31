@@ -4,7 +4,7 @@
 
 table {
   border-spacing: 0;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   border: 1px solid var(--border-table-1);
   overflow: hidden;
   color: var(--text-table-content-color);
@@ -16,7 +16,7 @@ table {
 
   th {
     font-weight: 400;
-    padding-block: 0.5rem;
+    padding-block: 0.75rem;
   }
 
   td {

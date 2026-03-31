@@ -2,14 +2,16 @@
 @import "./table.css";
 @import "./form.css";
 
-* {
+*,
+::before,
+::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 :root {
-  font-size: clamp(0.7rem, calc((100vw - 100px) * 0.035), 1rem);
+  font-size: clamp(0.55rem, calc((100vw - 100px) * 0.025), 1rem);
 }
 
 :root {
@@ -89,10 +91,6 @@ img {
 #app {
   display: flex;
   min-height: 100vh;
-
-  @media screen and (max-width: 750px) {
-    flex-direction: column;
-  }
 }
 
 main {

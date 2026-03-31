@@ -1,0 +1,56 @@
+<form class="form-data" action="/products/form/<%= item.id %>" method="post" onsubmit="disableSubmit(this)">
+  <header class="form-header">
+    <h3>
+      <span class="capitalize"><%= id ? 'Update' : 'Add' %></span> Product
+    </h3>
+  </header>
+
+  <div class="input-group">
+    <label>*Name: 
+      <input type="text" name="name" value="<%= oldInputs.name || item.name || '' %>" 
+      required onkeydown="clearErr(this)" />
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='name')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label>*Price: 
+      <input type="number" name="price" value="<%= oldInputs.price || item.price || '' %>" 
+      required onkeydown="clearErr(this)" step="0.01" min="0.00"/>
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='price')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+
+  <label>
+    Category:
+    <select name="category">
+      <option value="">Select (Optional)</option>
+        <% for(const row of categories) { %>
+          <option value="<%= row.id %>" <%= item.category_id == row.id ? 'selected' : '' %>><%= row.name %></option>
+        <% } %>
+    </select>
+  </label>
+
+  <button type="submit"><span class="capitalize"><%= id ? 'Update' : 'Add' %></span></button>
+</form>
+
+<script>
+  function disableSubmit(form) {
+    const submitButton = form.querySelector('button');
+    submitButton.disabled = true;
+  }
+
+  function clearErr(inputItem) {
+    const inputParent = inputItem.parentNode.parentNode.querySelector('.input-error');
+    inputParent.replaceChildren();
+  }
+</script>
+

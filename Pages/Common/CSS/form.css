@@ -7,17 +7,12 @@
     min-width: 0;
   }
 
-  input {
-    max-width: 17rem;
-  }
-
   select {
     width: max-content;
   }
 
   textarea {
     resize: none;
-    max-width: 20rem;
     min-height: 5rem;
   }
 
@@ -37,6 +32,15 @@
     &:user-invalid {
       border-color: var(--color-warning);
     }
+  }
+
+  input,
+  textarea {
+    width: 20rem;
+  }
+
+  input::-webkit-inner-spin-button {
+    display: none;
   }
 
   button[type="submit"] {
@@ -63,12 +67,10 @@
     }
   }
 
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 850px) {
     input,
-    select,
-    textarea,
-    button[type="submit"] {
-      max-width: unset;
+    textarea {
+      width: unset;
     }
 
     button[type="submit"] {
@@ -91,6 +93,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: max-content;
+
+  @media screen and (max-width: 850px) {
+    width: unset;
+  }
 }
 
 .submit-group {
