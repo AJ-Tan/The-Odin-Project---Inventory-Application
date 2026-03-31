@@ -29,15 +29,23 @@
     </div>
   </div>
 
-  <label>
-    Category:
-    <select name="category">
-      <option value="">Select (Optional)</option>
-        <% for(const row of categories) { %>
-          <option value="<%= row.id %>" <%= item.category_id == row.id ? 'selected' : '' %>><%= row.name %></option>
-        <% } %>
-    </select>
-  </label>
+  <div class="input-group">
+    <label>
+      Category:
+      <select name="category">
+        <option value="">Select (Optional)</option>
+          <% for(const row of categories) { %>
+            <option value="<%= row.id %>" <%= oldInputs.category == row.id ? 'selected' : 
+            item.category_id == row.id ? 'selected' : '' %>><%= row.name %></option>
+          <% } %>
+      </select>
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='category')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
 
   <button type="submit"><span class="capitalize"><%= id ? 'Update' : 'Add' %></span></button>
 </form>

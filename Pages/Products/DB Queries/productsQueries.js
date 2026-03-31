@@ -51,7 +51,7 @@ const getAllCategories = async () => {
 
 const insertProduct = async (name, price, category_id) => {
   await pool.query(
-    `INSERT INTO inventory_application.products (name, price, category_id) VALUES ($1, $2, $3) RETURNING id`,
+    `INSERT INTO inventory_application.products (name, price, category_id) VALUES ($1, $2, $3)`,
     [name, price, category_id || null],
   );
 };
