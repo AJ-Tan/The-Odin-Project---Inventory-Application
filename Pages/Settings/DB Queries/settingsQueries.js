@@ -5,7 +5,6 @@ const getAllCategory = async (category_id = undefined) => {
   let result = null;
 
   if (category_id) {
-    console.log("asd");
     result = await pool.query(
       `WITH RECURSIVE descendants AS (
         SELECT id, name FROM inventory_application.categories
@@ -15,7 +14,7 @@ const getAllCategory = async (category_id = undefined) => {
 
         SELECT c.id, c.name
         FROM inventory_application.categories c
-        JOIN descendants d ON d.id=c.parent_id
+        JOIN descendants d ON c.parent_id=d.id
       )
 
       SELECT * FROM inventory_application.categories c
@@ -69,6 +68,11 @@ const deleteCategory = async (id) => {
 
   await pool.query(
     `UPDATE inventory_application.categories SET parent_id=$2 WHERE parent_id=$1`,
+    [id, rows[0]?.parent_id],
+  );
+
+  await pool.query(
+    `UPDATE inventory_application.products SET category_id=$2 WHERE category_id=$1`,
     [id, rows[0]?.parent_id],
   );
 };
