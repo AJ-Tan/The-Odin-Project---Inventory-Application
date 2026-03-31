@@ -105,9 +105,10 @@ const updateWarehouse = async (id, name, email, phone, location) => {
 };
 
 const deleteWarehouse = async (id) => {
-  await pool.query(`DELETE FROM inventory_application.warehouse WHERE id=$1`, [
-    id,
-  ]);
+  await pool.query(
+    `UPDATE inventory_application.warehouse SET status='archived' WHERE id=$1`,
+    [id],
+  );
 };
 
 module.exports = {

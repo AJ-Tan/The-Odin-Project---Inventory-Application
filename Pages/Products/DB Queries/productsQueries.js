@@ -5,7 +5,8 @@ const getAllProducts = async () => {
     `WITH RECURSIVE product_chain AS (
     SELECT p.id as product_id,
     p.name as product_name, 
-    p.price as product_price, 
+    p.price as product_price,
+    p.status as product_status, 
     c.id as category_id, 
     c.name, c.parent_id,c.level
     FROM inventory_application.products p
@@ -15,7 +16,8 @@ const getAllProducts = async () => {
 
     SELECT pc.product_id as product_id,
     pc.product_name as product_name, 
-    pc.product_price as product_price, 
+    pc.product_price as product_price,
+    pc.product_status as product_status,
     c.id as category_id, 
     c.name, c.parent_id,c.level
     FROM product_chain pc
@@ -23,6 +25,7 @@ const getAllProducts = async () => {
     )
 
     SELECT product_id, product_name, STRING_AGG(name, ', ' ORDER BY level DESC) categories, product_price FROM product_chain 
+    WHERE product_status='active'
     GROUP BY product_id,product_name, product_price 
     ORDER BY product_id`,
   );
@@ -61,10 +64,18 @@ const updateProduct = async (id, name, price, category_id) => {
   );
 };
 
+const deleteProduct = async (id) => {
+  await pool.query(
+    `UPDATE inventory_application.products SET status='archived' WHERE id=$1`,
+    [id],
+  );
+};
+
 module.exports = {
   getAllProducts,
   getSelectedProduct,
   getAllCategories,
   insertProduct,
   updateProduct,
+  deleteProduct,
 };

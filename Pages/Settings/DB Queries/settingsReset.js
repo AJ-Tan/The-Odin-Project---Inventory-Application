@@ -3,7 +3,6 @@ const { Client } = require("pg");
 const SQL = `
 TRUNCATE TABLE 
   inventory_application.inventory,
-  inventory_application.product_categories,
   inventory_application.products,
   inventory_application.categories,
   inventory_application.warehouse
@@ -30,27 +29,6 @@ VALUES
 ('T-Shirt Basic', 300, 'active',2),
 ('Office Chair', 2500, 'active',3),
 ('Sample', 123, 'active',NULL);
-
-INSERT INTO inventory_application.product_categories (product_id, category_id)
-VALUES
--- iPhone (Electronics → Mobile Phones → Smartphones)
-(1, 1),
-(1, 4),
-(1, 5),
-
--- Samsung (Electronics → Mobile Phones → Smartphones)
-(2, 1),
-(2, 4),
-(2, 5),
-
--- Wooden Table (Furniture only)
-(3, 3),
-
--- T-Shirt (Clothing only)
-(4, 2),
-
--- Office Chair (Furniture only)
-(5, 3);
 
 INSERT INTO inventory_application.warehouse (name, location, phone, email, status)
 VALUES

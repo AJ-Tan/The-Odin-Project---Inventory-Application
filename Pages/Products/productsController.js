@@ -40,4 +40,8 @@ module.exports = {
     );
     res.status(204).redirect("/products");
   },
+  postDelete: async (req, res) => {
+    await dbQueries.deleteProduct(req.params.id);
+    res.status(204).redirect("/products");
+  },
 };
