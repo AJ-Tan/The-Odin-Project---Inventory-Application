@@ -31,7 +31,6 @@ const validateInput = [
     .custom((value, { req }) => {
       const parent_list = req.flash("parent_list");
       const exists = parent_list.some((item) => item.id === Number(value));
-
       if (!exists) {
         throw new Error(
           "Parent category might cause circular reference, please select another.",
@@ -59,6 +58,8 @@ module.exports = {
       tblData = await settingsQueries.getAllCategory(req.params.id);
       req.flash("parent_list", tblData);
       if (itemId) {
+        req.flash("parent_list");
+        req.flash("parent_list", tblData);
         item = await settingsQueries.getSelectedCategory(itemId);
       }
     } else if (settingsContent === "warehouse") {
