@@ -60,7 +60,7 @@ const updateProduct = async (id, name, price, category_id) => {
   await pool.query(
     `UPDATE inventory_application.products SET name=$2, price=$3, category_id=$4
     WHERE id=$1`,
-    [id, name, price, category_id],
+    [id, name, price, category_id || null],
   );
 };
 
