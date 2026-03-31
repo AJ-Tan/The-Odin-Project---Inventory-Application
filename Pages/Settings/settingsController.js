@@ -1,4 +1,4 @@
-const settingsQueries = require("../../models/settingsQueries");
+const settingsQueries = require("./DB Queries/settingsQueries");
 
 module.exports = {
   get: async (req, res) => {

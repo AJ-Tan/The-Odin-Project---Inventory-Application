@@ -1,5 +1,5 @@
-const pool = require("./pool");
-const resetData = require("./resetData");
+const pool = require("../../../models/pool");
+const resetData = require("./settingsReset");
 
 const getAllCategory = async () => {
   const { rows } = await pool.query(
