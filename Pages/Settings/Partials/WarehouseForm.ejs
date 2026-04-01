@@ -1,6 +1,6 @@
 <form
   class="form-data"
-  action="/settings/warehouse/<%= item.id %>"
+  action="/settings/warehouse/<%= params.id %>"
   method="post"
   onsubmit="disableSubmit(this)"
 >
@@ -12,7 +12,7 @@
   </div>
   <div class="input-group">
     <label>*Name:
-      <input type="text" name="name" value="<%= oldInputs.name || item.name || '' %>" 
+      <input type="text" name="name" value="<%= oldInputs.name || item?.name || '' %>" 
       required onkeydown="clearErr(this)"
       />
     </label>
@@ -25,7 +25,7 @@
 
   <div class="input-group">
     <label
-      >Email: <input type="email" name="email" value="<%= oldInputs.email || item.email || '' %>"
+      >Email: <input type="email" name="email" value="<%= oldInputs.email || item?.email || '' %>"
      onkeydown="clearErr(this)" /></label>
     <div class="input-error">
       <% for(const err of inputError.filter(i => i.path==='email')) { %>
@@ -36,7 +36,7 @@
     
   <div class="input-group">
     <label
-      >Phone: <input type="text" name="phone" value="<%= oldInputs.phone || item.phone || '' %>"
+      >Phone: <input type="text" name="phone" value="<%= oldInputs.phone || item?.phone || '' %>"
     onkeydown="clearErr(this)" /></label>
     <div class="input-error">
       <% for(const err of inputError.filter(i => i.path==='phone')) { %>
@@ -47,7 +47,7 @@
   <div class="input-group">
     <label>
       Location:
-      <textarea name="location" onkeydown="clearErr(this)"><%= oldInputs.location || item.location || '' %></textarea>
+      <textarea name="location" onkeydown="clearErr(this)"><%= oldInputs.location || item?.location || '' %></textarea>
     </label>
     <div class="input-error">
       <% for(const err of inputError.filter(i => i.path==='location')) { %>

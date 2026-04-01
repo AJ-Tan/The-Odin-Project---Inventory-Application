@@ -1,4 +1,4 @@
-<form class="form-data" action="/products/form/<%= item.id %>" method="post" onsubmit="disableSubmit(this)">
+<form class="form-data" action="/products/form/<%= id %>" method="post" onsubmit="disableSubmit(this)">
   <header class="form-header">
     <h3>
       <span class="capitalize"><%= id ? 'Update' : 'Add' %></span> Product
@@ -7,7 +7,7 @@
 
   <div class="input-group">
     <label>*Name: 
-      <input type="text" name="name" value="<%= oldInputs.name || item.name || '' %>" 
+      <input type="text" name="name" value="<%= oldInputs.name || item?.name || '' %>" 
       required onkeydown="clearErr(this)" />
     </label>
     <div class="input-error">
@@ -19,7 +19,7 @@
 
   <div class="input-group">
     <label>*Price: 
-      <input type="number" name="price" value="<%= oldInputs.price || item.price || '' %>" 
+      <input type="number" name="price" value="<%= oldInputs.price || item?.price || '' %>" 
       required onkeydown="clearErr(this)" step="0.01" min="0.00"/>
     </label>
     <div class="input-error">
@@ -36,7 +36,7 @@
         <option value="">Select (Optional)</option>
           <% for(const row of categories) { %>
             <option value="<%= row.id %>" <%= oldInputs.category == row.id ? 'selected' : 
-            item.category_id == row.id ? 'selected' : '' %>><%= row.name %></option>
+            item?.category_id == row.id ? 'selected' : '' %>><%= row.name %></option>
           <% } %>
       </select>
     </label>
