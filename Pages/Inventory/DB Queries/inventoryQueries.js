@@ -5,6 +5,7 @@ const getAllInventory = async () => {
     await pool.query(`SELECT i.product_id, i.warehouse_id, p.name product, w.name warehouse, w.location location, email, phone, quantity FROM inventory_application.inventory i 
     JOIN inventory_application.products p ON product_id = p.id 
     JOIN inventory_application.warehouse w ON warehouse_id = w.id
+    WHERE p.status='active' AND w.status='active'
     ORDER BY product_id ASC, warehouse_id ASC`);
 
   return rows;
