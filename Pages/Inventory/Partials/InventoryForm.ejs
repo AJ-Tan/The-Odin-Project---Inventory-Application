@@ -1,0 +1,89 @@
+<% 
+  let action = '';
+  if(product_id && warehouse_id) {
+    action=`${product_id}/${warehouse_id}`
+  }
+%>
+
+<form class="form-data" action="/inventory/form/<%= action %>" method="post" onsubmit="disableSubmit(this)">
+  <header class="form-header">
+    <h3>
+      <span class="capitalize"><%= product_id ? 'Update' : 'Add' %></span> Inventory
+    </h3>
+    <% if(!product_id) { %>
+      <span>Increments the quantity of an existing product + warehouse.</span>
+    <% } else { %>
+      <span>Replaces the quantity of an existing product + warehouse.</span>
+    <% } %> 
+  </header>
+
+  <div class="input-group">
+    <label>
+      *Product:
+      <select name="product" required <%= product_id ? 'disabled' : '' %>>
+        <option value="">Select...</option>
+          <% for(const row of products) { %>
+            <option value="<%= row.id %>" <%= oldInputs.product == row.id ? 'selected' : 
+            item?.product_id == row.id ? 'selected' : '' %>><%= row.name %></option>
+          <% } %>
+      </select>
+      <% if(product_id) { %>
+          <input type="hidden" name="product" value="<%= product_id %>">
+      <% } %>
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='product')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label>
+      *Warehouse:
+      <select name="warehouse" required <%= product_id ? 'disabled' : '' %>>
+        <option value="">Select...</option>
+          <% for(const row of warehouses) { %>
+            <option value="<%= row.id %>" <%= oldInputs.warehouse == row.id ? 'selected' : 
+            item?.warehouse_id == row.id ? 'selected' : '' %>><%= row.name %></option>
+          <% } %>
+      </select>
+      <% if(product_id) { %>
+          <input type="hidden" name="warehouse" value="<%= warehouse_id || 0 %>">
+      <% } %>
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='warehouse')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label>*Quantity: 
+      <input type="number" step="1" min="0" name="quantity" 
+      value="<%= oldInputs.quantity || item?.quantity || '' %>" 
+      required onkeydown="clearErr(this)" />
+    </label>
+    <div class="input-error">
+      <% for(const err of inputError.filter(i => i.path==='quantity')) { %>
+          <p><%= err.msg %></p>
+      <% } %>
+    </div>
+  </div>
+
+  <button type="submit"><span class="capitalize"><%= product_id ? 'Update' : 'Add' %></span></button>
+</form>
+
+<script>
+  function disableSubmit(form) {
+    const submitButton = form.querySelector('button');
+    submitButton.disabled = true;
+  }
+
+  function clearErr(inputItem) {
+    const inputParent = inputItem.parentNode.parentNode.querySelector('.input-error');
+    inputParent.replaceChildren();
+  }
+</script>
+

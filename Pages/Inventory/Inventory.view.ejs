@@ -16,7 +16,11 @@
             <span>Manage your inventory here.</span>
           </header>
           <div class="main-content">
-            <%- include("./Partials/InventoryTable.ejs") %>
+            <% if(content === 'form') { %>
+              <%- include("./Partials/InventoryForm.ejs") %>
+            <% } else { %>
+              <%- include("./Partials/InventoryTable.ejs") %>
+            <% } %>
           </div>
         </div>
       </main>
