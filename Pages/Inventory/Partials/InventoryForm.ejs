@@ -11,7 +11,7 @@
       <span class="capitalize"><%= product_id ? 'Update' : 'Add' %></span> Inventory
     </h3>
     <% if(!product_id) { %>
-      <span>Increments the quantity of an existing product + warehouse.</span>
+      <span>Adds a new row for product + warehouse. If the product + warehouse already exists, increments the quantity of the existing product + warehouse.</span>
     <% } else { %>
       <span>Replaces the quantity of an existing product + warehouse.</span>
     <% } %> 
