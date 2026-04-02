@@ -203,7 +203,7 @@ module.exports = {
     await settingsQueries.resetData();
     req.flash("notification", {
       status: "success",
-      message: "Data has succesfully reset to its preset state.",
+      message: "Data has successfully reset to its preset state.",
     });
     res.status(204).redirect("/settings?content=misc&success=t");
   },
