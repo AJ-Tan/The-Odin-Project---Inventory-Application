@@ -1,6 +1,16 @@
+const dbQueries = require("./DB Queries/dashboardQueries");
+
 module.exports = {
-  get: (req, res) => {
+  get: async (req, res) => {
     const menuParam = req.params.menu || "dashboard";
-    res.render("Dashboard/Dashboard.view.ejs", { active: menuParam });
+    const warehouseItems = await dbQueries.getByWarehouse();
+    const productItems = await dbQueries.getByProduct();
+    const categoryItems = await dbQueries.getByCategory();
+    res.render("Dashboard/Dashboard.view.ejs", {
+      active: menuParam,
+      warehouseItems,
+      productItems,
+      categoryItems,
+    });
   },
 };

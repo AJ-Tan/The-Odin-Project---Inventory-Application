@@ -22,6 +22,7 @@
   --bg-content: white;
 
   --border-header-color-1: rgb(227, 227, 227);
+  --border-header-color-2: rgb(238, 238, 238);
   --border-table-1: gray;
   --border-content-menu-btn-active: rgb(182, 182, 182);
   --border-input: #50a7d0;
@@ -127,6 +128,7 @@ main {
   border-radius: 0.5rem;
   padding-inline: 2rem;
   box-shadow: 0 4px 12px var(--shadow-content);
+  height: 100%;
 }
 
 .main-header {

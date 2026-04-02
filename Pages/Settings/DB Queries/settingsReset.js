@@ -28,7 +28,7 @@ VALUES
 ('Wooden Table', 3500, 'active',3),
 ('T-Shirt Basic', 300, 'active',2),
 ('Office Chair', 2500, 'active',3),
-('Sample', 123, 'active',NULL);
+('Sample phone', 123, 'active',4);
 
 INSERT INTO inventory_application.warehouse (name, location, phone, email, status)
 VALUES

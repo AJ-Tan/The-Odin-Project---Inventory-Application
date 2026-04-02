@@ -9,7 +9,58 @@
   <body>
     <div id="app">
       <%- include("../Common/Components/PageHeader/PageHeader.view.ejs", { active }) %>
-      Dashboard
+      <main>
+        <div class="main-wrapper">
+          <header class="main-header">
+            <h2>Dashboard</h2>
+            <span>Overview of the current status.</span>
+          </header>
+          <div class="main-content dashboard">
+            <ul class="dashboard-list">
+              <li class="dashboard-item">
+                <header class="item-header">
+                  <h3>Quantity By Warehouse (TOP 5)</h3>
+                </header>
+                <ul class="item-content">
+                  <% for(let item of warehouseItems) { %>
+                    <li class="item-content-row">
+                      <span class="item-title"><%= item.name %></span>
+                      <span class="item-detail"><%= item.quantity %></span>
+                    </li>
+                  <% } %>
+                </ul>
+              </li>
+              <li class="dashboard-item">
+                <header class="item-header">
+                  <h3>Quantity By Product (TOP 5)</h3>
+                </header>
+                <ul class="item-content">
+                  <% for(let item of productItems) { %>
+                    <li class="item-content-row">
+                      <span class="item-title"><%= item.name %></span>
+                      <span class="item-detail"><%= item.quantity %></span>
+                    </li>
+                  <% } %>
+                </ul>
+              </li>
+              <li class="dashboard-item">
+                <header class="item-header">
+                  <h3>Quantity By Category (TOP 5)</h3>
+                </header>
+                <ul class="item-content">
+                  <% for(let item of categoryItems) { %>
+                    <li class="item-content-row">
+                      <span class="item-title"><%= item.name %></span>
+                      <span class="item-detail"><%= item.quantity %></span>
+                    </li>
+                  <% } %>
+                </ul>
+              </li>
+            </ul>
+            </ul>
+          </div>
+        </div>
+      </main>
     </div>
   </body>
 </html>
