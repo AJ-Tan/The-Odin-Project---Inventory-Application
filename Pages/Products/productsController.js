@@ -46,6 +46,7 @@ module.exports = {
       item,
       oldInputs: req.flash("oldInputs")[0] || {},
       inputError: req.flash("inputErrors") || [],
+      notification: req.flash("notification")[0] || {},
     });
   },
   postAdd: [
@@ -65,6 +66,10 @@ module.exports = {
         req.body.price,
         req.body.category,
       );
+      req.flash("notification", {
+        status: "success",
+        message: "Product has been successfully added.",
+      });
       res.status(204).redirect("/products");
     },
   ],
@@ -86,11 +91,19 @@ module.exports = {
         req.body.price,
         req.body.category,
       );
+      req.flash("notification", {
+        status: "success",
+        message: "Product has been successfully updated.",
+      });
       res.status(204).redirect("/products");
     },
   ],
   postDelete: async (req, res) => {
     await dbQueries.deleteProduct(req.params.id);
+    req.flash("notification", {
+      status: "success",
+      message: "Product has been successfully deleted.",
+    });
     res.status(204).redirect("/products");
   },
 };
