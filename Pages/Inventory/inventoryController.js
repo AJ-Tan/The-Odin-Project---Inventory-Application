@@ -73,6 +73,7 @@ module.exports = {
       warehouses,
       oldInputs: req.flash("oldInputs")[0] || {},
       inputError: req.flash("inputError") || [],
+      notification: req.flash("notification")[0] || {},
       item,
     });
   },
@@ -98,8 +99,17 @@ module.exports = {
 
       if (!isExist) {
         await dbQueries.insertInventory(product_id, warehouse_id, quantity);
+        req.flash("notification", {
+          status: "success",
+          message: "Inventory has been successfully added.",
+        });
       } else {
         await dbQueries.updateAddInventory(product_id, warehouse_id, quantity);
+        req.flash("notification", {
+          status: "success",
+          message:
+            "Quantity has successfully incremented to an existing inventory.",
+        });
       }
 
       res.status(204).redirect("/inventory");
@@ -120,6 +130,10 @@ module.exports = {
       }
 
       await dbQueries.updateInventory(product_id, warehouse_id, quantity);
+      req.flash("notification", {
+        status: "success",
+        message: "Inventory has been successfully updated.",
+      });
       res.status(204).redirect("/inventory");
     },
   ],
@@ -127,6 +141,10 @@ module.exports = {
     const product_id = req.params.product_id;
     const warehouse_id = req.params.warehouse_id;
     await dbQueries.deleteInventory(product_id, warehouse_id);
+    req.flash("notification", {
+      status: "success",
+      message: "Inventory has been successfully deleted.",
+    });
     res.status(204).redirect("/inventory");
   },
 };
