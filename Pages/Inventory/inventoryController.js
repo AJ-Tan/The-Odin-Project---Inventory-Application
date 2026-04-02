@@ -50,13 +50,16 @@ module.exports = {
     const warehouses = await dbQueries.getAllWarehouse();
 
     req.flash("inventory_list");
-    req.flash("inventory_list", inventoryData);
+    req.flash(
+      "inventory_list",
+      inventoryData.length > 0 ? inventoryData : null,
+    );
 
     req.flash("product_list");
-    req.flash("product_list", products);
+    req.flash("product_list", products.length > 0 ? products : null);
 
     req.flash("warehouse_list");
-    req.flash("warehouse_list", warehouses);
+    req.flash("warehouse_list", warehouses.length > 0 ? warehouses : null);
 
     let item = {};
     if (product_id && warehouse_id) {

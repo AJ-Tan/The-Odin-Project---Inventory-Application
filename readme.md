@@ -45,7 +45,7 @@ A full-stack web app for tracking products, categories, inventory levels across 
 
 ## 🛠️ Technologies & Skills Applied
 
-This project was built while completing **The Odin Project – NodeJS Course** (full path shown in the screenshots you provided).
+This project was built while completing **The Odin Project – NodeJS Course**
 
 ### Topics Covered & Applied:
 

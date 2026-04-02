@@ -22,14 +22,14 @@ const getSelectedInventory = async (product_id, warehouse_id) => {
 
 const getAllProducts = async () => {
   const { rows } = await pool.query(
-    `SELECT * FROM inventory_application.products WHERE status='active'`,
+    `SELECT * FROM inventory_application.products WHERE status='active' ORDER BY name ASC`,
   );
   return rows;
 };
 
 const getAllWarehouse = async () => {
   const { rows } = await pool.query(
-    `SELECT * FROM inventory_application.warehouse WHERE status='active'`,
+    `SELECT * FROM inventory_application.warehouse WHERE status='active' ORDER BY name ASC`,
   );
   return rows;
 };
