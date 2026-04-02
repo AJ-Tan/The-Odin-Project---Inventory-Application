@@ -6,6 +6,7 @@ const dashboardRoute = require("./Pages/Dashboard/dashboardRoute");
 const productsRoute = require("./Pages/Products/productsRoute");
 const inventoryRoute = require("./Pages/Inventory/inventoryRoute");
 const settingsRoute = require("./Pages/Settings/settingsRoute");
+const errorRoute = require("./Pages/Error/errorRoute");
 
 const initializeSession = session({
   secret: process.env.SESSION_KEY,
@@ -23,6 +24,7 @@ app.use("/", dashboardRoute);
 app.use("/products", productsRoute);
 app.use("/inventory", inventoryRoute);
 app.use("/settings", settingsRoute);
+app.use(errorRoute);
 
 const PORT = process.env.PORT || 4321;
 app.listen(PORT, (err) => {
