@@ -32,7 +32,7 @@
   padding-block: 0.5rem;
 }
 
-.close-btn {
+.btn-close {
   align-self: flex-end;
   display: flex;
   align-items: center;
