@@ -1,0 +1,42 @@
+
+
+<% if(notification?.status && notification?.message) { %>
+  <aside class="notification-container">
+    <ul class="notification-list">
+      <li class="notification-item">
+        <div class="notification-wrapper">
+          <button type="button" class="close-btn">
+            <%- include("./close-icon.ejs") %>
+          </button>
+          <div class="notification-content">
+            <div class="icon-container icon-<%= notification.status %>">
+              <% if(notification.status === 'success') { %>
+                <%- include("./check-icon.ejs") %>
+              <% } else if(notification.status === 'warning') { %>
+                <%- include("./exclamation-icon.ejs") %>
+              <% } %> 
+            </div>
+            <p><%= notification.message %></p>
+          </div>
+        </div>
+        <div class="notification-bar <%= notification.status %>"></div>
+      </li>
+    </ul>
+  </aside>
+<% } %>
+
+<script>
+  const notificationItem = document.querySelectorAll(".notification-item");
+  notificationItem.forEach(item => {
+    console.log(item)
+    const notificationBar = item.querySelector(".notification-bar");
+    notificationBar.addEventListener("animationend", () => {
+      item.classList.add('close');
+      item.addEventListener("animationend", () => {
+        setTimeout(() => {
+          item.classList.add('remove');
+        }, 1000);
+      }, {once: true})
+    }, {once: true}); 
+  })
+</script>
