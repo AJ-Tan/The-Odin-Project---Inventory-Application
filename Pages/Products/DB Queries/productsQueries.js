@@ -44,7 +44,7 @@ const getSelectedProduct = async (id) => {
 
 const getAllCategories = async () => {
   const { rows } = await pool.query(
-    "SELECT * FROM inventory_application.categories",
+    "SELECT * FROM inventory_application.categories WHERE status='active' ORDER BY name ASC",
   );
   return rows;
 };
