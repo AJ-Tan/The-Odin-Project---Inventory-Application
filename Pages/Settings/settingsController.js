@@ -78,6 +78,7 @@ module.exports = {
       queries: req.query,
       inputError: req.flash("inputError"),
       oldInputs: req.flash("oldInputs")[0] || {},
+      notification: req.flash("notification")[0] || {},
     });
   },
 
@@ -100,6 +101,10 @@ module.exports = {
             req.body.name,
             req.body.parent_id,
           );
+          req.flash("notification", {
+            status: "success",
+            message: "Category has been successfully added.",
+          });
           res.status(204).redirect("/settings?content=category");
           break;
         case "warehouse":
@@ -109,6 +114,10 @@ module.exports = {
             req.body.phone,
             req.body.location,
           );
+          req.flash("notification", {
+            status: "success",
+            message: "Warehouse has been successfully added.",
+          });
           res.status(204).redirect("/settings?content=warehouse");
           break;
         default:
@@ -139,6 +148,10 @@ module.exports = {
             req.body.name,
             req.body.parent_id,
           );
+          req.flash("notification", {
+            status: "success",
+            message: "Category has been successfully updated.",
+          });
           res.status(204).redirect("/settings?content=category");
           break;
         case "warehouse":
@@ -149,6 +162,10 @@ module.exports = {
             req.body.phone,
             req.body.location,
           );
+          req.flash("notification", {
+            status: "success",
+            message: "Warehouse has been successfully updated.",
+          });
           res.status(204).redirect("/settings?content=warehouse");
           break;
         default:
@@ -163,10 +180,18 @@ module.exports = {
     switch (content) {
       case "category":
         await settingsQueries.deleteCategory(req.params.id);
+        req.flash("notification", {
+          status: "success",
+          message: "Category has been successfully deleted.",
+        });
         res.status(204).redirect("/settings?content=category");
         break;
       case "warehouse":
         await settingsQueries.deleteWarehouse(req.params.id);
+        req.flash("notification", {
+          status: "success",
+          message: "Warehouse has been successfully deleted.",
+        });
         res.status(204).redirect("/settings?content=warehouse");
         break;
       default:
@@ -176,6 +201,10 @@ module.exports = {
 
   postReset: async (req, res) => {
     await settingsQueries.resetData();
+    req.flash("notification", {
+      status: "success",
+      message: "Data has succesfully reset to its preset state.",
+    });
     res.status(204).redirect("/settings?content=misc&success=t");
   },
 };
