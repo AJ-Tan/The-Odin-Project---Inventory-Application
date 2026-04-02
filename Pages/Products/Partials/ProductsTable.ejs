@@ -14,7 +14,11 @@
       <tr>
         <td><%= row.product_id %></td>
         <td><%= row.product_name %></td>
-        <td><%= row.categories %></td>
+        <% const categories = row.categories.split(", ") %>
+        <td>
+          <b><%= categories.length > 1 ? `${categories[0]},` : categories[0] %></b> 
+          <%= categories.slice(1).join(", ") %>
+        </td>
         <td class="capitalize" >₱ <%= Number(row.product_price).toLocaleString() %></td>
         <td>
           <div class="tr-controls">
