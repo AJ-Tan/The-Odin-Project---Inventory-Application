@@ -1,13 +1,14 @@
 .notification-list {
   position: absolute;
-  top: 2.5rem;
-  right: 2rem;
+  top: 0;
+  right: 0;
   z-index: 3;
 
   width: 100vw;
-  max-width: 22rem;
+  max-width: 26rem;
   font-size: 1.1rem;
   overflow: hidden;
+  padding: 2rem;
 }
 
 .notification-item {
