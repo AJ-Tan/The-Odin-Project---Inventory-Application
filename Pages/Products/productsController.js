@@ -29,8 +29,13 @@ module.exports = {
     const content = req.params.content;
     const id = req.params.id;
     const productsData = await dbQueries.getAllProducts();
-    const categories = await dbQueries.getAllCategories();
-    req.flash("product_category", categories);
+    let categories = [];
+
+    if (content) {
+      categories = await dbQueries.getAllCategories();
+    }
+    req.flash("product_category");
+    req.flash("product_category", categories.length > 0 ? categories : null);
 
     let item = {};
     if (req.params.id) {

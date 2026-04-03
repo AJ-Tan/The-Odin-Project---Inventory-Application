@@ -46,8 +46,15 @@ module.exports = {
     const product_id = req.params.product_id;
     const warehouse_id = req.params.warehouse_id;
     const inventoryData = await dbQueries.getAllInventory();
-    const products = await dbQueries.getAllProducts();
-    const warehouses = await dbQueries.getAllWarehouse();
+    // const products = await dbQueries.getAllProducts();
+    // const warehouses = await dbQueries.getAllWarehouse();
+    let products = [];
+    let warehouses = [];
+
+    if (content) {
+      products = await dbQueries.getAllProducts();
+      warehouses = await dbQueries.getAllWarehouse();
+    }
 
     req.flash("inventory_list");
     req.flash(
